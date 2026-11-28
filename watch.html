@@ -16,9 +16,23 @@
 <body>
 <div class="card">
   <h1>🎬 CineReels</h1>
-  <p>الرابط ده بيفتح الفيلم على طول جوه التطبيق.<br>لو التطبيق مش مثبّت عندك، حمّله من هنا — والأفلام مجانية بالكامل.</p>
+  <p id="msg">الرابط ده بيفتح الفيلم على طول جوه التطبيق.<br>لو التطبيق مش مثبّت عندك، حمّله من هنا — والأفلام مجانية بالكامل.</p>
   <a class="btn" href="https://cinereelsapp.github.io/">حمّل تطبيق CineReels</a>
   <div class="note">سينما البيت — معاك في كل مكان</div>
 </div>
+<script>
+  // v1.64: the same /watch page is the fallback for series episode links
+  // too (?series=<id>&ep=<n>). Show episode wording when the link is a
+  // series link; the movie wording stays the default. (No-JS browsers
+  // still see the movie wording, which is fine — the button is the same.)
+  try {
+    var q = new URLSearchParams(window.location.search);
+    if (q.get("series")) {
+      document.getElementById("msg").innerHTML =
+        "الرابط ده بيفتح الحلقة على طول جوه التطبيق.<br>لو التطبيق مش مثبّت عندك، حمّله من هنا — والأفلام مجانية بالكامل.";
+      document.title = "CineReels — شغّل الحلقة";
+    }
+  } catch (e) {}
+</script>
 </body>
 </html>
